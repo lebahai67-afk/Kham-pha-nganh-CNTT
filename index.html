@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Nghiệp CNTT | Chủ đề G</title>
+  <!-- CSS gốc (style.css của bạn) -->
+  <link rel="stylesheet" href="style.css">
+  <!-- CSS mới (các tính năng nâng cấp v2) -->
+  <link rel="stylesheet" href="style_v2.css">
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Lên đầu trang">▲</button>
+
+<!-- TOAST -->
+<div id="toast"><span class="toast-icon">✓</span><span id="toast-msg">Đã gửi bình luận!</span></div>
+
+<!-- LANGUAGE SWITCHER -->
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="toggleLangDropdown()" id="lang-current-btn">🌍 VI ▾</button>
+  <div class="lang-dropdown" id="lang-dropdown">
+    <div class="lang-option selected" onclick="setLang('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+    <div class="lang-option" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span> English</div>
+    <div class="lang-option" onclick="setLang('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+    <div class="lang-option" onclick="setLang('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+    <div class="lang-option" onclick="setLang('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+    <div class="lang-option" onclick="setLang('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+    <div class="lang-option" onclick="setLang('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- LIVE WIDGET -->
+  <div class="header-live-widget" id="live-bar">
+    <div class="live-dot-ring"><span class="live-pulse"></span></div>
+    <span class="live-badge">● LIVE</span>
+    <span class="live-viewers">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:3px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span id="viewer-count">255</span>
+    </span>
+    <button class="live-search-btn" onclick="toggleLiveSearch()" title="Tìm kiếm">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <input type="text" class="live-search-input" id="live-search-input" placeholder="Tìm kiếm..." oninput="liveSearch(this.value)" onfocusout="hideLiveSearch(event)">
+    <span class="live-clock" id="live-clock">00:00:00</span>
+  </div>
+
+  <div class="header-badge" data-i18n="badge">Chủ đề G - Hướng nghiệp với Tin học</div>
+  <h1 data-i18n="h1line1">Khám Phá Ngành<br>Công Nghệ Thông Tin</h1>
+  <p class="subtitle" data-i18n="subtitle">Giới thiệu nhóm nghề Dịch vụ, Quản trị và Ứng dụng CNTT</p>
+  <div class="reading-time-badge" style="position:relative;z-index:3;margin-top:16px;">
+    📖 <span data-i18n="readtime">Thời gian đọc:</span> <strong id="reading-time-val">~8 phút</strong>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#bai-gioi-thieu" data-i18n="nav1">Bài giới thiệu</a>
+  <a href="#cac-bai-viet" data-i18n="nav2">Các bài viết</a>
+  <a href="#goc-anh" data-i18n="nav3">Góc ảnh</a>
+  <a href="#goc-video" data-i18n="nav4">Góc âm nhạc, video clip</a>
+  <a href="#goc-quiz" data-i18n="nav5">Khám phá nghề</a>
+  <a href="#goc-poll" data-i18n="nav6">Bình chọn</a>
+  <a href="#goc-binh-luan" data-i18n="nav7">Góc bình luận</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- BÀI GIỚI THIỆU -->
+  <section id="bai-gioi-thieu">
+    <div class="section-title-wrap">
+      <h2 class="section-title" data-i18n="sec1">Bài giới thiệu</h2>
+      <button class="copy-link-btn" onclick="copyLink('bai-gioi-thieu')">🔗 <span data-i18n="copylink">Copy link</span></button>
+    </div>
+    <div class="gioi-thieu-box">
+      <h3 data-i18n="intro_title">Chủ đề G – Hướng nghiệp với Tin học</h3>
+      <p data-i18n="intro_p1">
+        Công nghệ thông tin (CNTT) là ngành đang phát triển mạnh mẽ và có nhu cầu nhân lực rất cao tại Việt Nam.
+        Việt Nam đang thực hiện <strong style="color:#ff9999;">Chương trình Chuyển đổi số quốc gia</strong>
+        được Thủ tướng Chính phủ phê duyệt tháng 6 năm 2020, tạo ra hàng chục nghìn cơ hội việc làm mỗi năm.
+      </p>
+      <p data-i18n="intro_p2">
+        <strong style="color:#ff9999;">Bài 1</strong> giới thiệu nhóm nghề <em>Dịch vụ</em>
+        (Kĩ thuật viên CNTT, Kĩ sư an toàn thông tin) và nhóm nghề <em>Quản trị</em>
+        (Kĩ sư quản trị mạng, Quản trị và bảo trì hệ thống).
+      </p>
+      <p data-i18n="intro_p3">
+        <strong style="color:#ff9999;">Bài 2</strong> giới thiệu các nghề trong ngành
+        <em>Công nghiệp phần mềm</em> (3 nghề),
+        <em>Chuyển đổi số</em> (3 nghề),
+        <em>Truyền thông đa phương tiện</em> (4 nghề) và
+        <em>Ứng dụng CNTT các ngành khác</em> (3 nghề)
+      </p>
+      <div class="thong-ke">
+        <div class="thong-ke-item">
+          <span class="so">50,000+</span>
+          <div class="nhan" data-i18n="stat1">Kĩ sư IT tuyển dụng mỗi năm tại Việt Nam</div>
+        </div>
+        <div class="thong-ke-item">
+          <span class="so">2</span>
+          <div class="nhan" data-i18n="stat2">Nhóm nghề trong Bài 1 (Dịch vụ & Quản trị)</div>
+        </div>
+        <div class="thong-ke-item">
+          <span class="so">4</span>
+          <div class="nhan" data-i18n="stat3">Nhóm nghề trong Bài 2</div>
+        </div>
+        <div class="thong-ke-item">
+          <span class="so">17</span>
+          <div class="nhan" data-i18n="stat4">Tổng số nghề được giới thiệu trong Chủ đề G</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÁC BÀI VIẾT -->
+  <section id="cac-bai-viet">
+    <div class="section-title-wrap">
+      <h2 class="section-title" data-i18n="sec2">Các bài viết</h2>
+      <button class="copy-link-btn" onclick="copyLink('cac-bai-viet')">🔗 <span data-i18n="copylink">Copy link</span></button>
+    </div>
+
+    <!-- BÀI 1 – DỊCH VỤ -->
+    <p class="nhom-title"><img src="images/book.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> BÀI 1 – NHÓM NGHỀ DỊCH VỤ TRONG NGÀNH CNTT</p>
+    <div class="bai-viet-grid">
+
+      <!-- FLIP CARD: Kĩ thuật viên CNTT -->
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="ktvcntt">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'ktvcntt')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/programming.png" alt="" style="width:30px;height:30px;vertical-align:middle;">
+              <span data-tooltip="Người hỗ trợ kỹ thuật phần cứng + phần mềm tại tổ chức">a) Kĩ thuật viên Công nghệ Thông tin</span>
+            </h3>
+            <p>Kĩ thuật viên công nghệ thông tin là người làm những công việc cần đến kiến thức và kĩ năng về CNTT (phần cứng và phần mềm) tại các tổ chức, doanh nghiệp.</p>
+            <ul>
+              <li>Khắc phục lỗi, sửa chữa máy tính cho khách hàng</li>
+              <li>Tư vấn nâng cấp phần cứng, phần mềm</li>
+              <li>Lắp đặt thiết bị, thiết lập kết nối mạng</li>
+              <li>Quản lí máy tính, thiết bị ngoại vi</li>
+            </ul>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương khởi điểm: 8–15 triệu/tháng</li>
+              <li>Có kinh nghiệm: 15–30 triệu/tháng</li>
+              <li>Cần: Kiến thức phần cứng, Windows/Linux</li>
+              <li>Bằng cấp: CĐ/ĐH CNTT hoặc chứng chỉ CompTIA A+</li>
+              <li>Tính cách phù hợp: Kiên nhẫn, tỉ mỉ, thích giải quyết vấn đề</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLIP CARD: Kĩ sư An toàn TT -->
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="attt">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'attt')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/cyber-security.png" alt="" style="width:30px;height:30px;vertical-align:middle;">
+              <span data-tooltip="Bảo vệ hệ thống khỏi tấn công mạng & rò rỉ dữ liệu">b) Kĩ sư An toàn Thông tin</span>
+            </h3>
+            <p>Xây dựng và duy trì các giải pháp an toàn dữ liệu, bảo mật thông tin và khôi phục hệ thống khi sự cố xảy ra.</p>
+            <ul>
+              <li>Thiết lập và hướng dẫn quy định an toàn thông tin</li>
+              <li>Theo dõi, báo động khi có tín hiệu đáng ngờ</li>
+              <li>Lập và triển khai kế hoạch xử lí sự cố</li>
+              <li>Tư vấn an toàn thông tin cho bộ phận phát triển</li>
+            </ul>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương khởi điểm: 15–25 triệu/tháng</li>
+              <li>Senior: 40–80 triệu/tháng</li>
+              <li>Chứng chỉ: CEH, CISSP, CompTIA Security+</li>
+              <li>Kỹ năng: Penetration testing, mã hóa, firewall</li>
+              <li>Tính cách phù hợp: Tư duy phân tích, cẩn trọng</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BÀI 1 – QUẢN TRỊ -->
+    <p class="nhom-title"><img src="images/book.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> BÀI 1 – NHÓM NGHỀ QUẢN TRỊ TRONG NGÀNH CNTT</p>
+    <div class="bai-viet-grid">
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="qtm">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'qtm')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/network-administrator.png" alt="" style="width:30px;height:30px;vertical-align:middle;">
+              <span data-tooltip="Đảm bảo hệ thống mạng luôn thông suốt & an toàn">a) Kĩ sư Quản trị Mạng</span>
+            </h3>
+            <p>Đảm bảo hệ thống mạng máy tính luôn thông suốt và hoạt động an toàn. Bao gồm quản lí, vận hành, cấu hình và bảo vệ mạng.</p>
+            <ul>
+              <li>Quản lí thiết bị mạng, cấu hình và điều chỉnh hiệu năng</li>
+              <li>Bảo vệ mạng trước tấn công, truy cập bất hợp pháp</li>
+              <li>Khắc phục sự cố mạng</li>
+            </ul>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 12–30 triệu/tháng</li>
+              <li>Chứng chỉ: CCNA, CCNP (Cisco)</li>
+              <li>Kỹ năng: TCP/IP, VPN, Routing & Switching</li>
+              <li>Tính cách: Kỹ lưỡng, xử lý nhanh sự cố</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="btht">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'btht')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/software-engineer.png" alt="" style="width:30px;height:30px;vertical-align:middle;">
+              <span data-tooltip="Quản lý toàn bộ hệ thống CNTT của tổ chức">b) Quản trị và Bảo trì Hệ thống</span>
+            </h3>
+            <p>Quản lí cả phần mềm và phần cứng liên quan đến vận hành hệ thống mạng máy tính và truyền thông dữ liệu.</p>
+            <ul>
+              <li>Phân tích nhu cầu về hệ thống thông tin của tổ chức</li>
+              <li>Cài đặt phần cứng và phần mềm cho hệ thống mạng</li>
+              <li>Tối ưu hoá và đánh giá hoạt động hệ thống</li>
+            </ul>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 15–35 triệu/tháng</li>
+              <li>Kỹ năng: Windows Server, Linux, VMware</li>
+              <li>Cần biết: Active Directory, backup, monitoring</li>
+              <li>Tính cách: Có trách nhiệm, tư duy hệ thống</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BÀI 2 – NHÓM 1: CÔNG NGHIỆP PHẦN MỀM -->
+    <p class="nhom-title"><img src="images/book.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> BÀI 2 – NHÓM 1: MỘT SỐ NGHỀ TRONG NGÀNH CÔNG NGHIỆP PHẦN MỀM</p>
+    <div class="bai-viet-grid">
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="ktv">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'ktv')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/tester.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> a) Kiểm thử viên</h3>
+            <p>Chạy thử phần mềm để xác nhận đáp ứng đúng các yêu cầu thiết kế và vận hành, tìm và báo cáo lỗi cho nhóm phát triển.</p>
+            <p><strong style="color:#ff9999;"><img src="images/check (1).png" alt="" style="width:20px;height:20px;vertical-align:text-bottom;"> Không nhất thiết phải biết lập trình cao!</strong></p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 8–20 triệu/tháng</li>
+              <li>Chứng chỉ: ISTQB Foundation Level</li>
+              <li>Kỹ năng: Test case, bug report, Jira, Selenium</li>
+              <li>Không cần lập trình giỏi — cần tư duy logic</li>
+              <li>Tính cách: Tỉ mỉ, kiên nhẫn, hay đặt câu hỏi</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="qlkt">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'qlkt')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/unit.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> b) Người quản lí Kiểm thử</h3>
+            <p>Lập quy trình kiểm thử, viết kịch bản chạy thử, lập kế hoạch và phân công công việc cho các kiểm thử viên thực hiện.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 20–45 triệu/tháng</li>
+              <li>Kinh nghiệm: 3–5 năm làm kiểm thử viên</li>
+              <li>Kỹ năng: Quản lý dự án, lập kế hoạch kiểm thử</li>
+              <li>Tính cách: Lãnh đạo, giao tiếp tốt, quyết đoán</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card full flip-card-wrap reveal" tabindex="0" data-id="uiux">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'uiux')" title="Lưu">🔖</button>
+        <div class="flip-card-inner" style="min-height:240px;">
+          <div class="flip-front">
+            <h3><img src="images/ui-design.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> c) Nhà thiết kế giao diện người dùng &amp; Nhà thiết kế trải nghiệm người dùng (UI/UX)</h3>
+            <p>Đảm bảo sản phẩm phần mềm thân thiện, hấp dẫn và dễ sử dụng. Sử dụng kiến thức tâm lí học, y sinh học để điều chỉnh tính năng phù hợp với người dùng.</p>
+            <p><strong style="color:#ff9999;">Không cần kĩ năng lập trình — cần tư duy sáng tạo!</strong></p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Công cụ</h4>
+            <ul>
+              <li>Lương: 12–35 triệu/tháng; Senior: 50 triệu+</li>
+              <li>Công cụ: Figma, Adobe XD, Sketch, Zeplin</li>
+              <li>Portfolio thiết kế là yêu cầu quan trọng</li>
+              <li>Hiểu biết về tâm lý học màu sắc, UX research</li>
+              <li>Tính cách: Sáng tạo, đồng cảm với người dùng</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BÀI 2 – NHÓM 2: CHUYỂN ĐỔI SỐ -->
+    <p class="nhom-title"><img src="images/book.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> BÀI 2 – NHÓM 2: CHUYỂN ĐỔI SỐ VÀ MỘT SỐ NGHỀ LIÊN QUAN</p>
+    <div class="bai-viet-grid">
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="cloud">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'cloud')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/data-management.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> a) Kĩ sư Điện toán Đám mây</h3>
+            <p>Thiết kế, phát triển, bảo trì và khắc phục sự cố cơ sở hạ tầng đám mây. Sử dụng máy chủ Internet để lưu trữ, xử lí và phân tích dữ liệu.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 20–50 triệu/tháng</li>
+              <li>Chứng chỉ: AWS Solutions Architect, GCP, Azure</li>
+              <li>Kỹ năng: Docker, Kubernetes, Terraform, CI/CD</li>
+              <li>Tính cách: Tư duy hạ tầng, thích tự động hóa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="iot">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'iot')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/technology.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> b) Kĩ sư IoT</h3>
+            <p>Thiết kế, phát triển, triển khai và bảo trì các hệ thống IoT — mạng lưới thiết bị trao đổi thông tin theo thời gian thực.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 15–40 triệu/tháng</li>
+              <li>Kỹ năng: Embedded C, MQTT, Raspberry Pi, Arduino</li>
+              <li>Kết hợp: Điện tử + Phần mềm + Mạng</li>
+              <li>Tính cách: Thích phần cứng lẫn phần mềm</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card full flip-card-wrap reveal" tabindex="0" data-id="ai">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'ai')" title="Lưu">🔖</button>
+        <div class="flip-card-inner" style="min-height:220px;">
+          <div class="flip-front">
+            <h3><img src="images/chip.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> Kĩ sư Trí tuệ Nhân tạo (AI)</h3>
+            <p>Xây dựng mô hình AI, quản lí quy trình phát triển AI và đảm bảo các kết quả nghiên cứu AI mới nhất được triển khai vào sản xuất. Lĩnh vực nóng nhất hiện nay.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 25–80 triệu/tháng; Senior: 100 triệu+</li>
+              <li>Kỹ năng: Python, TensorFlow, PyTorch, ML pipelines</li>
+              <li>Toán học: Đại số tuyến tính, xác suất thống kê</li>
+              <li>Tính cách: Ham nghiên cứu, tư duy phân tích cao</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BÀI 2 – NHÓM 3: TRUYỀN THÔNG ĐA PHƯƠNG TIỆN -->
+    <p class="nhom-title"><img src="images/book.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> BÀI 2 – NHÓM 3: MỘT SỐ NGHỀ ỨNG DỤNG CNTT TRONG NGÀNH TRUYỀN THÔNG ĐA PHƯƠNG TIỆN</p>
+    <div class="bai-viet-grid">
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="thietkedohoa">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'thietkedohoa')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/designer.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> a) Chuyên viên Thiết kế Đồ hoạ</h3>
+            <p>Chọn kiểu chữ, màu sắc, hình khối, hình ảnh và bài trí tổng thể sản phẩm đồ hoạ bằng Photoshop, Illustrator, Sketch... Không cần lập trình.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 8–22 triệu/tháng; Freelance không giới hạn</li>
+              <li>Công cụ: Photoshop, Illustrator, CorelDRAW</li>
+              <li>Portfolio là yếu tố quyết định khi xin việc</li>
+              <li>Tính cách: Sáng tạo, có khiếu thẩm mỹ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="ttdpt">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'ttdpt')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/web-design.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> b) Chuyên viên Thiết kế Truyền thông Đa phương tiện</h3>
+            <p>Thiết kế, xử lí và biên tập âm thanh, hình ảnh cho sản phẩm số, kết hợp kỹ thuật đa phương tiện và truyền thông đại chúng.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 10–25 triệu/tháng</li>
+              <li>Công cụ: Premiere Pro, After Effects, Audition</li>
+              <li>Cần: Kỹ năng kể chuyện bằng hình ảnh/âm thanh</li>
+              <li>Tính cách: Sáng tạo, nhạy cảm với nghệ thuật</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="webdev">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'webdev')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/web-development.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> c) Nhà phát triển Trang web</h3>
+            <p>Thiết kế giao diện, lập trình trang web, kiểm tra và khắc phục sự cố về hiệu suất hoặc trải nghiệm người dùng.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 12–40 triệu/tháng; Fullstack: 50 triệu+</li>
+              <li>Frontend: HTML, CSS, JS, React/Vue</li>
+              <li>Backend: Node.js, PHP, Python, Java</li>
+              <li>Tính cách: Logic + sáng tạo, thích xây dựng</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="vfx">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'vfx')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/movie.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> d) Chuyên viên Kĩ xảo Điện ảnh</h3>
+            <p>Đảm bảo các hiệu ứng âm thanh, hình ảnh mang lại cảm xúc thật nhất và truyền tải đúng thông điệp của nhà sản xuất.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 15–50 triệu/tháng (theo dự án)</li>
+              <li>Công cụ: Nuke, Houdini, Maya, Blender</li>
+              <li>Ngành đang bùng nổ với phim VN và quảng cáo</li>
+              <li>Tính cách: Sáng tạo, chú ý từng chi tiết</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BÀI 2 – NHÓM 4 -->
+    <p class="nhom-title"><img src="images/book.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> BÀI 2 – NHÓM 4: MỘT SỐ NGHỀ ỨNG DỤNG CNTT TRONG CÁC NGÀNH KHÁC</p>
+    <div class="bai-viet-grid">
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="data">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'data')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/monitor.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> a) Nhà phân tích Dữ liệu &amp; Nhà khoa học Dữ liệu</h3>
+            <p>Phân tích tập dữ liệu để xác định xu hướng, phát hiện bất thường và tri thức tiềm ẩn, làm cơ sở cho lãnh đạo ra quyết định.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 18–50 triệu/tháng</li>
+              <li>Kỹ năng: Python/R, SQL, Tableau, Power BI</li>
+              <li>Cần: Toán thống kê, tư duy phân tích dữ liệu</li>
+              <li>Tính cách: Tò mò, thích tìm pattern trong data</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card flip-card-wrap reveal" tabindex="0" data-id="gis">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'gis')" title="Lưu">🔖</button>
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <h3><img src="images/map.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> b) Kĩ sư GIS (Hệ thống Thông tin Địa lí)</h3>
+            <p>Xây dựng bản đồ số, duy trì cơ sở dữ liệu địa lí và phân tích dữ liệu bằng các công cụ GIS cho nhiều lĩnh vực ứng dụng.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 12–28 triệu/tháng</li>
+              <li>Công cụ: ArcGIS, QGIS, Python, PostGIS</li>
+              <li>Ứng dụng: Đô thị, quốc phòng, môi trường</li>
+              <li>Tính cách: Tỉ mỉ, thích làm việc với bản đồ/không gian</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-viet-card full flip-card-wrap reveal" tabindex="0" data-id="fintech">
+        <button class="bookmark-btn" onclick="toggleBookmark(this,'fintech')" title="Lưu">🔖</button>
+        <div class="flip-card-inner" style="min-height:220px;">
+          <div class="flip-front">
+            <h3><img src="images/stock-market.png" alt="" style="width:30px;height:30px;vertical-align:middle;"> c) Kĩ sư Công nghệ Tài chính (Fintech)</h3>
+            <p>Áp dụng công nghệ tiên tiến để cải thiện dịch vụ tài chính. Ứng dụng điện toán đám mây, phần mềm phân tích dữ liệu, AI vào tài chính – ngân hàng.</p>
+            <span class="flip-hint">🔄 Hover để xem thêm</span>
+          </div>
+          <div class="flip-back">
+            <h4>💡 Lương & Yêu cầu</h4>
+            <ul>
+              <li>Lương: 20–60 triệu/tháng</li>
+              <li>Kỹ năng: Blockchain, API tài chính, bảo mật thanh toán</li>
+              <li>Kết hợp: CNTT + Tài chính – Ngân hàng</li>
+              <li>Tính cách: Cẩn thận, hiểu quy định tài chính</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GÓC ẢNH -->
+  <section id="goc-anh">
+    <div class="section-title-wrap">
+      <h2 class="section-title" data-i18n="sec3">Góc ảnh</h2>
+      <button class="copy-link-btn" onclick="copyLink('goc-anh')">🔗 <span data-i18n="copylink">Copy link</span></button>
+    </div>
+    <div class="anh-grid">
+      <div class="anh-item" onclick="openLightbox('images/dich-vu-bao-tri-may-tinh1.jpg','Kĩ thuật viên CNTT sửa chữa và bảo trì phần cứng máy tính')">
+        <div class="anh-placeholder"><img src="images/dich-vu-bao-tri-may-tinh1.jpg" alt=""></div>
+        <div class="anh-caption">Kĩ thuật viên CNTT sửa chữa và bảo trì phần cứng máy tính</div>
+      </div>
+      <div class="anh-item" onclick="openLightbox('images/P1.1.jpg','Trung tâm điều hành an toàn thông tin (SOC) giám sát 24/7')">
+        <div class="anh-placeholder"><img src="images/P1.1.jpg" alt=""></div>
+        <div class="anh-caption">Trung tâm điều hành an toàn thông tin (SOC) giám sát 24/7</div>
+      </div>
+      <div class="anh-item" onclick="openLightbox('images/ky-su-mang-topcv-267ad69fc40209.png','Kĩ sư quản trị mạng vận hành hệ thống mạng doanh nghiệp')">
+        <div class="anh-placeholder"><img src="images/ky-su-mang-topcv-267ad69fc40209.png" alt=""></div>
+        <div class="anh-caption">Kĩ sư quản trị mạng vận hành hệ thống mạng doanh nghiệp</div>
+      </div>
+      <div class="anh-item" onclick="openLightbox('images/TTNT_1f_1_ebe37be9c4.jpg','Kĩ sư AI nghiên cứu và phát triển mô hình trí tuệ nhân tạo')">
+        <div class="anh-placeholder"><img src="images/TTNT_1f_1_ebe37be9c4.jpg" alt=""></div>
+        <div class="anh-caption">Kĩ sư AI nghiên cứu và phát triển mô hình trí tuệ nhân tạo</div>
+      </div>
+      <div class="anh-item" onclick="openLightbox('images/Thiet-ke-chua-co-ten-2-1.jpg','GIS xây dựng bản đồ số ứng dụng quy hoạch đô thị')">
+        <div class="anh-placeholder"><img src="images/Thiet-ke-chua-co-ten-2-1.jpg" alt=""></div>
+        <div class="anh-caption">GIS xây dựng bản đồ số ứng dụng quy hoạch đô thị</div>
+      </div>
+      <div class="anh-item" onclick="openLightbox('images/UX designer.jpeg','Nhà thiết kế UI/UX xây dựng giao diện và trải nghiệm người dùng')">
+        <div class="anh-placeholder"><img src="images/UX designer.jpeg" alt=""></div>
+        <div class="anh-caption">Nhà thiết kế UI/UX xây dựng giao diện và trải nghiệm người dùng</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <!-- GÓC VIDEO -->
+  <section id="goc-video">
+    <div class="section-title-wrap">
+      <h2 class="section-title" data-i18n="sec4">Góc âm nhạc, video clip</h2>
+      <button class="copy-link-btn" onclick="copyLink('goc-video')">🔗 <span data-i18n="copylink">Copy link</span></button>
+    </div>
+    <div class="video-grid">
+      <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=m4xEF92ZPuk','_blank')">
+        <div class="video-thumb yt-thumb">
+          <img src="https://img.youtube.com/vi/m4xEF92ZPuk/hqdefault.jpg" alt="thumbnail" loading="lazy">
+          <div class="yt-play-overlay"><div class="play-circle">▶</div></div>
+          <div class="yt-logo">▶ YouTube</div>
+        </div>
+        <div class="video-info">
+          <h4>Kĩ thuật viên CNTT – Công việc hằng ngày</h4>
+          <p>Tìm hiểu thực tế công việc của kĩ thuật viên IT tại Việt Nam</p>
+        </div>
+      </div>
+      <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=inWWhr5tnEA','_blank')">
+        <div class="video-thumb yt-thumb">
+          <img src="https://img.youtube.com/vi/inWWhr5tnEA/hqdefault.jpg" alt="thumbnail" loading="lazy">
+          <div class="yt-play-overlay"><div class="play-circle">▶</div></div>
+          <div class="yt-logo">▶ YouTube</div>
+        </div>
+        <div class="video-info">
+          <h4>Kĩ sư An toàn Thông tin – Nghề hot thời đại số</h4>
+          <p>Vì sao an toàn thông tin là lĩnh vực được săn đón nhất hiện nay?</p>
+        </div>
+      </div>
+      <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=9kRgVxULbag','_blank')">
+        <div class="video-thumb yt-thumb">
+          <img src="https://img.youtube.com/vi/9kRgVxULbag/hqdefault.jpg" alt="thumbnail" loading="lazy">
+          <div class="yt-play-overlay"><div class="play-circle">▶</div></div>
+          <div class="yt-logo">▶ YouTube</div>
+        </div>
+        <div class="video-info">
+          <h4>Chuyển đổi số – Cơ hội nghề nghiệp mới</h4>
+          <p>Kĩ sư AI, IoT, Đám mây – những nghề của tương lai số</p>
+        </div>
+      </div>
+      <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=vgj0OjJde-U','_blank')">
+        <div class="video-thumb yt-thumb">
+          <img src="https://img.youtube.com/vi/vgj0OjJde-U/hqdefault.jpg" alt="thumbnail" loading="lazy">
+          <div class="yt-play-overlay"><div class="play-circle">▶</div></div>
+          <div class="yt-logo">▶ YouTube</div>
+        </div>
+        <div class="video-info">
+          <h4>Hướng nghiệp – Chọn ngành CNTT phù hợp bản thân</h4>
+          <p>Gợi ý cách chọn nghề phù hợp với sở thích và năng lực của bạn</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUIZ SECTION ===== -->
+  <section id="goc-quiz">
+    <div class="section-title-wrap">
+      <h2 class="section-title">🧠 Khám phá nghề phù hợp với bạn</h2>
+      <button class="copy-link-btn" onclick="copyLink('goc-quiz')">🔗 Copy link</button>
+    </div>
+    <div class="quiz-wrap">
+      <!-- INTRO -->
+      <div class="quiz-intro" id="quiz-intro">
+        <h3>Nghề IT nào dành cho bạn?</h3>
+        <p>Trả lời 10 câu hỏi ngắn về tính cách và sở thích. Kết quả sẽ cho bạn thấy <strong style="color:var(--purple-light)">2 nghề phù hợp nhất</strong> cùng tỉ lệ % — vì đôi khi con đường bạn chọn không phải cái số 1!</p>
+        <button class="quiz-start-btn" onclick="startQuiz()">BẮT ĐẦU KHÁM PHÁ →</button>
+      </div>
+
+      <!-- QUESTION AREA -->
+      <div class="quiz-question-area" id="quiz-qa">
+        <div class="quiz-progress-bar-wrap">
+          <div class="quiz-progress-fill" id="quiz-prog-fill"></div>
+        </div>
+        <div class="quiz-q-num" id="quiz-q-num">CÂU 1 / 10</div>
+        <div class="quiz-q-text" id="quiz-q-text"></div>
+        <div class="quiz-options" id="quiz-opts"></div>
+      </div>
+
+      <!-- RESULT -->
+      <div class="quiz-result" id="quiz-result">
+        <div class="quiz-result-header">
+          <h3 id="quiz-res-title">Kết quả của bạn</h3>
+          <p id="quiz-res-sub">Dựa trên câu trả lời, đây là 2 nghề phù hợp nhất với bạn</p>
+        </div>
+        <div class="quiz-result-cards" id="quiz-res-cards"></div>
+        <div class="quiz-note" id="quiz-note">
+          <strong>💡 Lưu ý quan trọng:</strong> Kết quả này chỉ mang tính tham khảo dựa trên xu hướng tính cách. Nếu bạn thích nghề xếp thứ 2 hơn — <strong>hãy theo đuổi nó!</strong> Đam mê và nỗ lực luôn quan trọng hơn bất kỳ bài test nào.
+        </div>
+        <div class="quiz-footer">
+          <button class="quiz-restart-btn" onclick="restartQuiz()">🔄 Làm lại</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== POLL SECTION ===== -->
+  <section id="goc-poll">
+    <div class="section-title-wrap">
+      <h2 class="section-title">📊 Bình chọn nghề yêu thích</h2>
+      <button class="copy-link-btn" onclick="copyLink('goc-poll')">🔗 Copy link</button>
+    </div>
+    <div class="poll-wrap">
+      <div class="poll-tabs" id="poll-tabs"></div>
+      <div class="poll-question" id="poll-question"></div>
+      <div class="poll-options" id="poll-options"></div>
+      <div class="poll-meta" id="poll-meta"></div>
+    </div>
+  </section>
+
+  <!-- GÓC BÌNH LUẬN -->
+  <section id="goc-binh-luan">
+    <div class="section-title-wrap">
+      <h2 class="section-title" data-i18n="sec7">Góc bình luận</h2>
+      <button class="copy-link-btn" onclick="copyLink('goc-binh-luan')">🔗 <span data-i18n="copylink">Copy link</span></button>
+    </div>
+
+    <div class="bl-form-wrap">
+      <div class="bl-form-header">
+        <div class="bl-avatar" id="bl-avatar-display">?</div>
+        <div>
+          <div class="bl-form-title" data-i18n="bl_title">Chia sẻ suy nghĩ của bạn</div>
+          <div class="bl-form-sub" data-i18n="bl_sub">Nghề CNTT nào trong Chủ đề G bạn quan tâm nhất?</div>
+        </div>
+        <div class="bl-recording-dot"><span class="bl-rec-pulse"></span></div>
+      </div>
+      <div class="bl-form-fields">
+        <div class="bl-field-row">
+          <input type="text" id="ten" class="bl-input" placeholder="Họ và tên..." oninput="updateAvatar(this.value)">
+          <select id="nghe-yeu-thich" class="bl-select">
+            <option value="">-- Chọn nghề yêu thích --</option>
+            <optgroup label="Bài 1 – Dịch vụ">
+              <option>Kĩ thuật viên CNTT</option>
+              <option>Kĩ sư An toàn Thông tin</option>
+            </optgroup>
+            <optgroup label="Bài 1 – Quản trị">
+              <option>Kĩ sư Quản trị Mạng</option>
+              <option>Quản trị và Bảo trì Hệ thống</option>
+            </optgroup>
+            <optgroup label="Bài 2 – Công nghiệp phần mềm">
+              <option>Kiểm thử viên</option>
+              <option>Người quản lí Kiểm thử</option>
+              <option>Nhà thiết kế UI/UX</option>
+            </optgroup>
+            <optgroup label="Bài 2 – Chuyển đổi số">
+              <option>Kĩ sư Điện toán Đám mây</option>
+              <option>Kĩ sư IoT</option>
+              <option>Kĩ sư Trí tuệ Nhân tạo (AI)</option>
+            </optgroup>
+            <optgroup label="Bài 2 – Truyền thông đa phương tiện">
+              <option>Chuyên viên Thiết kế Đồ hoạ</option>
+              <option>Chuyên viên Thiết kế TTĐPT</option>
+              <option>Nhà phát triển Trang web</option>
+              <option>Chuyên viên Kĩ xảo Điện ảnh</option>
+            </optgroup>
+            <optgroup label="Bài 2 – Ứng dụng CNTT ngành khác">
+              <option>Nhà phân tích / Khoa học Dữ liệu</option>
+              <option>Kĩ sư GIS</option>
+              <option>Kĩ sư Công nghệ Tài chính (Fintech)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="bl-textarea-wrap">
+          <textarea id="noidung" class="bl-textarea" rows="4" maxlength="500" placeholder="Nghề CNTT nào bạn muốn theo đuổi? Tại sao?..." oninput="updateCharCount(this)"></textarea>
+          <span class="bl-char-count" id="bl-char-count">0/500</span>
+        </div>
+        <div class="bl-form-bottom">
+          <div class="bl-emoji-row">
+            <span class="bl-emoji-label">Cảm xúc:</span>
+            <button class="bl-emoji-btn active" data-emoji="😊" onclick="selectEmoji(this)" title="Vui">😊</button>
+            <button class="bl-emoji-btn" data-emoji="😄" onclick="selectEmoji(this)" title="Hứng khởi">😄</button>
+            <button class="bl-emoji-btn" data-emoji="🤩" onclick="selectEmoji(this)" title="Xuất sắc">🤩</button>
+            <button class="bl-emoji-btn" data-emoji="🤔" onclick="selectEmoji(this)" title="Suy nghĩ">🤔</button>
+          </div>
+          <button class="bl-submit-btn" onclick="guiYKien()">GỬI BÌNH LUẬN ✈</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-filter-bar">
+      <div class="bl-filter-tabs">
+        <button class="bl-tab" onclick="filterBL('all', this)">TẤT CẢ</button>
+        <button class="bl-tab" onclick="filterBL('new', this)">MỚI NHẤT</button>
+        <button class="bl-tab active" onclick="filterBL('popular', this)">NHIỀU ♥</button>
+      </div>
+      <div class="bl-search-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="bl-search-input" placeholder="Tìm bình luận..." oninput="searchBL(this.value)">
+      </div>
+      <span class="bl-count" id="bl-total-count">0</span>
+    </div>
+
+    <div id="danh-sach-bl"></div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h3>Thông tin về nhóm</h3>
+      <p><strong style="color:#ff9999;">Tác giả:</strong> Lee Bá Hải</p>
+      <p><strong style="color:#ff9999;">Lớp:</strong> 12C1</p>
+      <p><strong style="color:#ff9999;">Trường:</strong> THPT Bình Phú</p>
+      <p><strong style="color:#ff9999;">Môn:</strong> Tin học – Bài 12, Chủ đề G</p>
+      <p><strong style="color:#ff9999;">Ngày cập nhật nội dung gần nhất:</strong> 26/02/2026</p>
+      <br>
+      <p><strong style="color:#ff9999;">Địa chỉ email:</strong> <a href="https://mail.google.com/mail/?view=cm&to=lebahai67@gmail.com" target="_blank" style="color:var(--orange-light)">lebahai67@gmail.com ↗</a></p>
+    </div>
+    <div>
+      <h3>Nguồn thông tin tham khảo</h3>
+      <ul>
+        <li>SGK Tin học 12 – Bộ GD&ĐT (Cánh Diều)</li>
+        <li>topdev.vn/page/bao-cao-it-viet-nam</li>
+        <li>Bộ TT&TT – "Tài liệu những điều cần biết về nghề CNTT"</li>
+        <li>Quyết định số 34/2020/QĐ-TTg – Danh mục nghề nghiệp Việt Nam</li>
+        <li>Thông tư 09/2022/TT-BGDĐT – Danh mục thống kê ngành đào tạo</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">
+    © 2026 Báo Tường Điện Tử – Hướng nghiệp với Tin học – Chủ đề G – Tin học 12
+  </div>
+</footer>
+
+
+<!-- JavaScript -->
+<script src="langs/lang.vi.js"></script>
+<script src="langs/lang.en.js"></script>
+<script src="langs/lang.ja.js"></script>
+<script src="langs/lang.zh.js"></script>
+<script src="langs/lang.de.js"></script>
+<script src="langs/lang.fr.js"></script>
+<script src="langs/lang.ko.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
